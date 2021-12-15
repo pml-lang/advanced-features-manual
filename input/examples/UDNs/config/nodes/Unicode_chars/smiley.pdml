@@ -1,0 +1,10 @@
+[node
+    [name smiley]
+    [writer
+        [script
+            """
+            context.write ( '&#128515;' )
+            """
+        ]
+    ]
+]

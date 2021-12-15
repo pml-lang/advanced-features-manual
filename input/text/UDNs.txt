@@ -1,0 +1,271 @@
+Advanced PML Features
+
+Introduction
+
+This document describes a set of advanced PML features.
+
+Advanced features aim to simplify and automate the writing process as far as possible. Hence they have the potential to considerably increase productivity and reliability, especially in professional environments where documents change often and their content depends on external resources.
+
+For example, you can:
+create user-defined nodes which you can then use in your PML documents, in addition to the standard nodes provided by PML.
+embed Javascript source code snippets in a PML document, to dynamically generate PML code and resources (e.g. graphical elements like diagrams) at build-time, and to execute external OS commands and scripts.
+apply XML technolgies to PML documents (e.g. validate, query, modify, or transform documents)
+
+The setup/configuration of advanced features requires some technical knowledge. However, once configured by skilled people, these features are often easy to use by non-tech-savy people, and don't require the installation/setup of complex tool chains.
+
+
+Warnings
+
+Advanced features are currently in an experimental state (work in progress) which means that:
+They are not fully developed yet and not yet bug-free. You might encounter limitations and malfunctions.
+They are not guaranteed to be backwards-compatible. Anything can change in future versions, although this is avoided as far as possible.
+They are not fully documented yet.
+
+Only the feature 'user-defined nodes' is available in the current public version of PML.
+
+If you encounter a bug or miss an important feature, then please submit an [link url=... text=issue].
+
+If you have a question or want to discuss an idea/improvement, then please create a [link url=... text=discussion].
+
+
+
+User Defined Nodes
+
+Why Are They Useful?
+
+Suppose we have to write a document in which the foreground and background colors of text snippets change often. Some text is written in red on yellow, other text in blue on orange, etc. Moreover we want these text snippets to have a rounded border with the same color as the text. Here is an example of how it would look like in the final document:
+
+UDN_example
+
+In standard PML, we could do that as follows:
+
+[code
+	Some text is [span ( html_style="color: red; background-color: yellow; border: 1px solid red; padding:5px; border-radius: 3px;" ) red on yellow]
+		
+	Some text is [span ( html_style="color: blue; background-color: orange; border: 1px solid blue; padding:5px; border-radius: 3px;" ) blue on orange]
+code]
+
+Needless to say, this works, but it's [i not user-friendly]. If these nodes are used often in the document, it will quickly become cumbersome and unmaintainable to repeat boilerplate code like this again and again.
+
+What we would want to write is code like this:
+
+[code
+	Some text is [ctext (fc=red bc=yellow) red on yellow]
+		
+	Some text is [ctext (fc=blue bc=orange) blue on orange]
+code]
+
+
+As can be seen in the above example code, we would like to have a node with name [c ctext] (colored text) and two attributes ([c fc] and [c bc]) to define the foreground/background colors.
+
+But PML doesn't have a [c ctext] node.
+
+You could ask the PML developers to add a [c ctext] node to PML. Although it would be easy for the developers to do that, they would kindly explain you that they will not do it. Why? Because PML must remain [i simple] for everybody. There are hundreds of nodes that [i could] be added to PML because [i some] users might need them. But that would increase PML's complexity dramatically for everybody, and make PML difficult to maintain.
+
+For example, imagine that PML provided culture-specific nodes to cover specific needs depending on the country/region in which the readers live. People in French would be happy to have specific support for so-called guillemets ([c «] and [c »]) which are used as quotation marks in the french language. However, people in other regions of the world never use guillemets, but they might have [i other] desiderata to cover [i their] specific needs. To avoid chaos and an unmaintainable proliferation of nodes, PML only provides a standard set of common nodes that are used frequently by most writers.
+
+There is, however, a solution for users who want their own, non-standard, but frequently used nodes, to cover their specific needs: [i user defined nodes].
+
+A [i user defined node] is a node which you can add yourself to PML. You can do this by providing a configuration file that defines the properties and behavior of your node. You can define as many user defined nodes as you need. A single file can define one or more UDNs. You can use a set of files which can be located in different directories. For example, you can
+use one directory to define global UDNs used in all your documents
+use other directories to define specific nodes only used in specific documents
+Because UDNs are defined in simple text files, they can easily be shared and maintained in a source code repository of a version control service such as Github or Gitlab. Thus UDNs can benefit from all advantages provided by such community services. For example, users could share and maintain their culture-specific UDNs in a repository, to help other users located in the same country or region.
+
+
+How Does it Work?
+
+To create node [c ctext], you just have to put a text file named [c ctext.pdml] with the following content in sub-directory [c config/nodes]:
+
+[code
+	[node
+		[name ctext]
+		[attributes
+			[attribute
+				[name fc]
+			]
+			[attribute
+				[name bc]
+			]
+		]
+		[writer
+			[script
+				"""
+				foregroundColor = attributes.get ( "fc" );
+				backgroundColor = attributes.get ( "bc" );
+
+				context.write ( '<span style="color: ' + foregroundColor + '; background-color: ' + backgroundColor + '; border: 1px solid ' + foregroundColor + '; padding:5px; border-radius: 3px;">' )
+				context.writeInlineChildNodes();
+				context.write ( '</span>' )
+				"""
+			]
+		]
+	]
+code]
+
+Note the mandatory file extension used in the above example: [c pdml]. This means that the file contains a [PDML document]. PDML stands for [i Practical Data and Markup Language]. You can easily see that PDML code looks like PML code. This is no surprise, because the PDML syntax is actually used in PML. So you don't need to learn a new syntax. Another advantage is that all PDML features (such as [c !ins-file] to insert shared code) can be used to define UDNs. For more information about PDML please visit its [link url=... text=website] or read [link url=... text="Introduction to PDML"].
+
+As can be seen:
+
+    The UDN's name ([c ctext]) is defined in the PDML node [c name]: [c \[name ctext\]]
+    The attributes of the new PML node are defined in two [c attribute] nodes which are child-nodes of node [c attributes]:
+	[code
+		[attributes
+			[attribute
+				[name fc]
+			]
+			[attribute
+				[name bc]
+			]
+		]
+	code]
+
+The most interesting part is the node named [c script]. This node contains Javascript code that will be executed by the PML converter to write the target HTML code. Being able to use a very popular programming language to create UDNs is very powerful, because all Javascript features, as well as all existing libraries can be used. For example, in case of more complex UDNs you could use the [link url=https://ejs.co/ text="EJS templating language"] that lets you generate HTML markup with plain JavaScript.
+
+[note
+	Instead of using the syntax [c (fc=red bc=yellow)] to define the foreground/background colors, we could also decide to use another syntax. For example, we could use only one attribute named [c c], and separate the two colors by a slash: [c (c=red/yellow)]. This is possible because all Javascript string functions can be used with a [c script] node.
+]
+    
+Some text is [ctext (c=blue/orange) blue on orange]
+
+
+[note
+	Future PML versions might add support for
+	other scripting languages (such as Python and Ruby)
+	template engines like Handlebars or Mustache.
+]
+
+
+Using Javascript to define the HTML rendering has advantages and disadvantages. 
+
+ If you know Javascript you will appreciate this.
+ 
+ 
+Specification
+
+
+UDN Syntax/Grammar Rules
+
+UDNs are defined in a [link url=... text=PDML] document.
+
+The mandatory root node of a UDN is named [c node].
+
+Node [c node] must have exactly one child-node named [c name], which defines the UDN's name. For example, a UDN with name [c ctext] is defined as follows:
+
+[code
+	[node
+		[name ctext]
+		...
+	]
+code]
+
+A node name must match the regex [a-zA-Z_][a-zA-Z1-9_\.-]*. This means that a name starts with a letter or an underscore (_), optionally followed by any number of letters, digits, underscores (_), hyphens (-), or dots (.).
+
+To avoid clashes of UDN names with future standard PML node names it is recommended to suffix UDN node names with an underscore (e.g. [c my_node_name_]), unless you think it's very unlikely that your UDN name will ever be used for a standard PML node.
+
+If a UDN name clashes with an existing PML node name, an error is generated.
+
+[note
+	A future PML version might support explicitly overriding the target code generation of standard PML nodes, by using UDNs. This would allow to partially (or even completely) override the converter's output generation process.
+]
+
+Node [c node] must have exactly one child-node named [c writer].
+
+Node [c writer] must have exactly one child-node named [c script].
+
+Node [c script] contains the Javascript code used to generate the target code (e.g. HTML).
+
+The Javascript code must be embedded between a pair of so-called [i fence lines] - an opening fence line, and a closing fence line. A fence line is composed of an indent (spaces and tabs), followed by 3 or more identical characters which must be either [c "], [c =], or [c ~], followed by a new line. Examples of valid fences: [c """], [c ====], [c ~~~~~~~~~~]. The opening fence line must contain at least 3 characters. The closing fence line must contain at least as many identical fence characters as the opening fence line.
+
+Here is a working example of a UDN named `smiley` that can be used to insert a smiley in a PML document with the syntax `[smiley]`:
+
+[caption File config/nodes/smiley.pdml}
+
+[code
+	[node
+		[name smiley]
+		[writer
+			[script
+				"""
+				context.write ( '&#128515;' )
+				"""
+			]
+		]
+	]
+code]
+
+As can be seen, the Javascript code `context.write ( '...' )` is used to write HTML code.
+
+Node [c node] can optionally have exactly one child-node named [c attributes]. This node is used to define optional UDN attributes.
+
+Node [c attributes] can optionally have any number of child-nodes named [c attribute]. Each [c attribute] node is used to define one attribute.
+
+An [c attribute] node must have exactly one child-node named [c name]. [c name] is a text node that defines the attribute's name.
+
+An [c attribute] can optionally have exactly one child-node named [c default]. [c default] is a text node that defines the attribute's default value. The default value is the attribute's value that will be used if no value is explicitly defined in the PML code that uses the UDN.
+
+Suppose an UDN has three attributes:
+attribute color with no default value
+attribute width with a default value of 200
+attribute height with a default value of 100
+
+This would be written as follows:
+
+[code
+	[attributes
+		[attribute
+			[name color]
+		]
+		[attribute
+			[name width]
+			[default 200]
+		]
+		[attribute
+			[name height]
+			[default 100]
+		]
+	]
+code]
+
+[note
+	Whitespace between nodes is optional. The above code could also be written like this:
+	[code
+		[attributes
+			[attribute [name color]]
+			[attribute [name width] [default 200]]
+			[attribute [name height][default 100]]
+		]
+	code]
+]
+
+If a single file contains several UDNs then all [c node] nodes must be child-nodes of a single root node named [c nodes], like this:
+
+[code
+	[nodes
+		[node
+			[name node_1]
+			...
+		]
+		[node
+			[name node_2]
+			...
+		]
+		...
+	]
+code]
+
+
+UDN Files and Directories
+
+A UDN is defined in a single [c pdml] file. The file name (without the extension) is irrelevant. However, an UDN with name [c foo] would typically be stored in file [c foo.pdml].
+
+A single file can contain several UDNs, as shown later.
+
+By default:
+	PML searches for UDN files in sub-directory [c config/nodes] of the current working directory. If no such directory exists, then no UDNs are used.
+	Files in sub-directories of [c config/nodes] are included in the search.
+	Files with an extension different from [c pdml] are ignored (including files with no extension).
+	Files whose name starts with [c ---] are ignored. This is useful to temporaryly disable UDN files.
+	
+The PML converter's [c convert] command supports parameter [c user_defined_nodes_directories] (shortcut [c udnd]) to override the default behavior and define a list of directories in which to search for UDN files. For more information please refer to the documentation of parameter [c user_defined_nodes_directories]. For example, type [c pmlc command_info --command convert] in a terminal, and look for parameter [c user_defined_nodes_directories].
+
+

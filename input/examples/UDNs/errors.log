@@ -1,0 +1,124 @@
+
+THE FOLLOWING APPLICATION ERROR OCCURRED (2021-12-10T11:06:58.9240136):
+
+Java throwable in thread Thread[main,5,main]:
+org.graalvm.polyglot.PolyglotException: TypeError: invokeMember (writeNewLine) on dev.pml.converter.writer.HTML.context.se_generic_scripting_context$GenericScriptingContext@6d91790b failed due to: Arity error - expected: 0 actual: 1
+Stack trace:
+> <js>.:program, Java line 10
+> org.graalvm.polyglot.Context.eval, Java line 401
+> dev.pdml.ext.scripting.ScriptingUtils.executeJavascriptWithBindings, Java line 31
+> dev.pml.converter.writer.HTML.node.inline.generic.fa_PML_generic_inline_node_HTML_writer.write, Java line 83
+> dev.pml.converter.writer.HTML.node.inline.generic.fa_PML_generic_inline_node_HTML_writer.write, Java line 35
+> dev.pml.converter.writer.HTML.context.fa_PML_HTML_writer_context.write_nodes, Java line 636
+> dev.pml.converter.writer.HTML.context.fa_PML_HTML_writer_context.write_block_node_with_child_nodes, Java line 751
+> dev.pml.converter.writer.HTML.node.block.paragraph.fa_PML_paragraph_node_HTML_writer.write, Java line 33
+> dev.pml.converter.writer.HTML.node.block.paragraph.fa_PML_paragraph_node_HTML_writer.write, Java line 20
+> dev.pml.converter.writer.HTML.context.fa_PML_HTML_writer_context.write_nodes, Java line 636
+> dev.pml.converter.writer.HTML.node.block.document.fa_PML_document_node_HTML_writer.write, Java line 49
+> dev.pml.converter.writer.HTML.node.block.document.fa_PML_document_node_HTML_writer.write, Java line 23
+> dev.pml.converter.writer.HTML.se_PML_HTML_page_writer.write_page, Java line 70
+> dev.pml.converter.se_PML_to_HTML_Converter.try_create_HTML_file, Java line 245
+> dev.pml.converter.se_PML_to_HTML_Converter.try_convert, Java line 164
+> dev.pml.converter.PAIOM_commands.se_PML_convert_command.execute, Java line 674
+> dev.pml.converter.PAIOM_commands.se_PML_convert_command$13.execute, Java line 620
+> dev.pml.converter.PAIOM_commands.se_PML_convert_command$13.execute, Java line 608
+> org.ppl.paiom.config.execution.single_command_executor.fa_single_command_executor.execute_command, Java line 36
+> org.ppl.paiom.meta_commands.commands.execute_command.se_execute_command_meta_command.execute_command, Java line 236
+> org.ppl.paiom.fa_paiom.execute_meta_command, Java line 318
+> org.ppl.paiom.fa_paiom.execute_command_from_string_data_2, Java line 222
+> org.ppl.paiom.fa_paiom.execute_command_from_string_data, Java line 136
+> org.ppl.paiom.fa_paiom.execute_command_from_command_line_arguments, Java line 79
+> org.ppl.paiom.se_PAIOM_command_executor.execute_command_line_arguments, Java line 52
+> org.ppl.paiom.se_PAIOM_command_executor.execute_command_line_arguments_2, Java line 104
+> org.ppl.paiom.se_PAIOM_command_executor.execute_command_line_arguments_3, Java line 178
+> dev.pml.converter.se_CLI_start.execute_command_line_arguments, Java line 155
+> dev.pml.converter.se_CLI_start.start, Java line 87
+> dev.pml.converter.se_start.start, Java line 62
+> dev.pml.converter.se_start.main, Java line 123
+
+Trace:
+> Factory PML_generic_inline_node_HTML_writer.write, line 46 (dev.pml.converter.writer.HTML.node.inline.generic)
+> Factory PML_HTML_writer_context.write_nodes, line 205 (dev.pml.converter.writer.HTML.context)
+> Factory PML_HTML_writer_context.write_block_node_with_child_nodes, line 258 (dev.pml.converter.writer.HTML.context)
+> Factory PML_paragraph_node_HTML_writer.write, line 8 (dev.pml.converter.writer.HTML.node.block.paragraph)
+> Factory PML_HTML_writer_context.write_nodes, line 205 (dev.pml.converter.writer.HTML.context)
+> Factory PML_document_node_HTML_writer.write, line 35 (dev.pml.converter.writer.HTML.node.block.document)
+> Service PML_HTML_page_writer.write_page, line 18 (dev.pml.converter.writer.HTML)
+> Service PML_to_HTML_Converter.try_create_HTML_file, line 111 (dev.pml.converter)
+> Service PML_to_HTML_Converter.try_convert, line 29 (dev.pml.converter)
+> Service PML_convert_command.execute, line 210 (dev.pml.converter.PAIOM_commands)
+> Service PML_convert_command.execute, line 165 (dev.pml.converter.PAIOM_commands)
+> Factory single_command_executor.execute_command, line 11 (org.ppl.paiom.config.execution.single_command_executor)
+> Service execute_command_meta_command.execute_command, line 102 (org.ppl.paiom.meta_commands.commands.execute_command)
+> Factory paiom.execute_meta_command, line 156 (org.ppl.paiom)
+> Factory paiom.execute_command_from_string_data_2, line 87 (org.ppl.paiom)
+> Factory paiom.execute_command_from_string_data, line 43 (org.ppl.paiom)
+> Factory paiom.execute_command_from_command_line_arguments, line 14 (org.ppl.paiom)
+> Service PAIOM_command_executor.execute_command_line_arguments, line 18 (org.ppl.paiom)
+> Service PAIOM_command_executor.execute_command_line_arguments_2, line 35 (org.ppl.paiom)
+> Service PAIOM_command_executor.execute_command_line_arguments_3, line 60 (org.ppl.paiom)
+> Service CLI_start.execute_command_line_arguments, line 77 (dev.pml.converter)
+> Service CLI_start.start, line 34 (dev.pml.converter)
+> Service start.start, line 10 (dev.pml.converter)
+
+THE FOLLOWING APPLICATION ERROR OCCURRED (2021-12-13T11:11:04.619438):
+
+Java throwable in thread Thread[main,5,main]:
+org.graalvm.polyglot.PolyglotException: TypeError: invokeMember (writeInlineChildNodes) on dev.pml.converter.writer.HTML.context.se_generic_scripting_context$GenericScriptingContext@a567e72 failed due to: Unknown identifier: writeInlineChildNodes
+Stack trace:
+> <js>.:program, Java line 5
+> org.graalvm.polyglot.Context.eval, Java line 401
+> dev.pdml.ext.scripting.ScriptingUtils.executeJavascriptWithBindings, Java line 48
+> dev.pml.converter.writer.HTML.node.inline.generic.fa_PML_generic_inline_node_HTML_writer.write, Java line 98
+> dev.pml.converter.writer.HTML.node.inline.generic.fa_PML_generic_inline_node_HTML_writer.write, Java line 38
+> dev.pml.converter.writer.HTML.context.fa_PML_HTML_writer_context.write_nodes, Java line 636
+> dev.pml.converter.writer.HTML.context.fa_PML_HTML_writer_context.write_block_node_with_child_nodes, Java line 751
+> dev.pml.converter.writer.HTML.node.block.paragraph.fa_PML_paragraph_node_HTML_writer.write, Java line 33
+> dev.pml.converter.writer.HTML.node.block.paragraph.fa_PML_paragraph_node_HTML_writer.write, Java line 20
+> dev.pml.converter.writer.HTML.context.fa_PML_HTML_writer_context.write_nodes, Java line 636
+> dev.pml.converter.writer.HTML.node.block.document.fa_PML_document_node_HTML_writer.write, Java line 49
+> dev.pml.converter.writer.HTML.node.block.document.fa_PML_document_node_HTML_writer.write, Java line 23
+> dev.pml.converter.writer.HTML.se_PML_HTML_page_writer.write_page, Java line 70
+> dev.pml.converter.se_PML_to_HTML_Converter.try_create_HTML_file, Java line 250
+> dev.pml.converter.se_PML_to_HTML_Converter.try_convert, Java line 169
+> dev.pml.converter.PAIOM_commands.se_PML_convert_command.execute, Java line 674
+> dev.pml.converter.PAIOM_commands.se_PML_convert_command$13.execute, Java line 620
+> dev.pml.converter.PAIOM_commands.se_PML_convert_command$13.execute, Java line 608
+> org.ppl.paiom.config.execution.single_command_executor.fa_single_command_executor.execute_command, Java line 36
+> org.ppl.paiom.meta_commands.commands.execute_command.se_execute_command_meta_command.execute_command, Java line 236
+> org.ppl.paiom.fa_paiom.execute_meta_command, Java line 318
+> org.ppl.paiom.fa_paiom.execute_command_from_string_data_2, Java line 222
+> org.ppl.paiom.fa_paiom.execute_command_from_string_data, Java line 136
+> org.ppl.paiom.fa_paiom.execute_command_from_command_line_arguments, Java line 79
+> org.ppl.paiom.se_PAIOM_command_executor.execute_command_line_arguments, Java line 52
+> org.ppl.paiom.se_PAIOM_command_executor.execute_command_line_arguments_2, Java line 104
+> org.ppl.paiom.se_PAIOM_command_executor.execute_command_line_arguments_3, Java line 178
+> dev.pml.converter.se_CLI_start.execute_command_line_arguments, Java line 155
+> dev.pml.converter.se_CLI_start.start, Java line 87
+> dev.pml.converter.se_start.start, Java line 62
+> dev.pml.converter.se_start.main, Java line 123
+
+Trace:
+> Factory PML_generic_inline_node_HTML_writer.write, line 49 (dev.pml.converter.writer.HTML.node.inline.generic)
+> Factory PML_HTML_writer_context.write_nodes, line 205 (dev.pml.converter.writer.HTML.context)
+> Factory PML_HTML_writer_context.write_block_node_with_child_nodes, line 258 (dev.pml.converter.writer.HTML.context)
+> Factory PML_paragraph_node_HTML_writer.write, line 8 (dev.pml.converter.writer.HTML.node.block.paragraph)
+> Factory PML_HTML_writer_context.write_nodes, line 205 (dev.pml.converter.writer.HTML.context)
+> Factory PML_document_node_HTML_writer.write, line 35 (dev.pml.converter.writer.HTML.node.block.document)
+> Service PML_HTML_page_writer.write_page, line 18 (dev.pml.converter.writer.HTML)
+> Service PML_to_HTML_Converter.try_create_HTML_file, line 111 (dev.pml.converter)
+> Service PML_to_HTML_Converter.try_convert, line 29 (dev.pml.converter)
+> Service PML_convert_command.execute, line 210 (dev.pml.converter.PAIOM_commands)
+> Service PML_convert_command.execute, line 165 (dev.pml.converter.PAIOM_commands)
+> Factory single_command_executor.execute_command, line 11 (org.ppl.paiom.config.execution.single_command_executor)
+> Service execute_command_meta_command.execute_command, line 102 (org.ppl.paiom.meta_commands.commands.execute_command)
+> Factory paiom.execute_meta_command, line 156 (org.ppl.paiom)
+> Factory paiom.execute_command_from_string_data_2, line 87 (org.ppl.paiom)
+> Factory paiom.execute_command_from_string_data, line 43 (org.ppl.paiom)
+> Factory paiom.execute_command_from_command_line_arguments, line 14 (org.ppl.paiom)
+> Service PAIOM_command_executor.execute_command_line_arguments, line 18 (org.ppl.paiom)
+> Service PAIOM_command_executor.execute_command_line_arguments_2, line 35 (org.ppl.paiom)
+> Service PAIOM_command_executor.execute_command_line_arguments_3, line 60 (org.ppl.paiom)
+> Service CLI_start.execute_command_line_arguments, line 77 (dev.pml.converter)
+> Service CLI_start.start, line 34 (dev.pml.converter)
+> Service start.start, line 10 (dev.pml.converter)

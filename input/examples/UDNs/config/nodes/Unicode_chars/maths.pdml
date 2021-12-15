@@ -1,0 +1,37 @@
+[nodes
+    [- π -]
+    [node
+        [name pi]
+        [writer
+            [script
+                ~~~
+                context.write ( '&#960;' )
+                ~~~
+            ]
+        ]
+    ]
+
+    [- ∞ -]
+    [node
+        [name infinity]
+        [writer
+            [script
+                ~~~
+                context.write ( '&#8734;' )
+                ~~~
+            ]
+        ]
+    ]
+
+    [- ∫ -]
+    [node
+        [name integral]
+        [writer
+            [script
+                ~~~
+                context.write ( '&#8747;' )
+                ~~~
+            ]
+        ]
+    ]
+]
