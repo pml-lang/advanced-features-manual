@@ -16,7 +16,7 @@
                 ]
             code]
 
-            A node name must match the regex [c \[a-zA-Z_\]\[a-zA-Z1-9_\\.-\]*]. This means that a name starts with a letter or an underscore ([c _]), optionally followed by any number of letters, digits, underscores ([c _]), hyphens ([c -]), or dots ([c .]).
+            A node name must match the regex [c \[a-zA-Z_\]\[a-zA-Z0-9_\\.-\]*]. This means that a name starts with a letter or an underscore ([c _]), optionally followed by any number of letters, digits, underscores ([c _]), dots ([c .]), or hyphens ([c -]).
 
 [-
             To avoid clashes of UDN names with future standard PML node names it is recommended to suffix UDN node names with an underscore (e.g. [c my_node_name_]), unless you think it's very unlikely that your UDN name will ever be used for a standard PML node.
