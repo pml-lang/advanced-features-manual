@@ -2,8 +2,6 @@
 
     This document is a work in progress.
 
-    At the moment, the only feature available in the public version of PML is [i user-defined nodes]. This is also the only feature described in this document.
-
     Advanced features are first published as an [i experimental] feature. This means that you can try out the feature, but you need to be aware that:
     [list
         [el The feature is not fully developed yet, and may contain bugs. You might encounter limitations and malfunctions.]
@@ -11,7 +9,7 @@
         [el The documentation might be incomplete and change in future releases.]
     ]
 
-    Experimental features are tagged by the suffix [c()a (Experimental)] in their title.
+    Experimental features are tagged by the suffix [c() (Experimental)] in their title.
 
     If you encounter a bug or miss an important functionality, then please submit an [link url=https://github.com/pml-lang/advanced-features-manual/issues text=issue].
 

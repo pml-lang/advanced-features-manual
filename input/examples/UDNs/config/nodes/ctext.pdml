@@ -15,12 +15,10 @@
             backgroundColor = attributes.get ( "bc" );
 
             context.write ( '<span style="color: ' + foregroundColor + '; background-color: ' + backgroundColor + '; border: 1px solid ' + foregroundColor + '; padding:5px; border-radius: 3px;">' )
-            context.writeChildNodes();
-            context.write ( '</span>' )
 
-            context.writeLine ( "line 1" );
-            context.writeLine ( "line 2" );
-            context.writeNewLine();
+            context.writeChildNodes();
+
+            context.write ( '</span>' )
             """
         ]
     ]

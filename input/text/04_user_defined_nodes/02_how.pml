@@ -1,4 +1,11 @@
-[ch [title How Does it Work?]
+[ch (id=UDN_how) [title How Does it Work?]
+
+    [admon (label=Important)
+        The method to define UDNs (as described in this document) might change in a future version.
+        Hence the instructions in this chapter and the following ones might become obsolete.
+        In the future, UDNs will possibly be defined using [xref node_id=script_nodes text="Script Nodes"].
+        However, the concept of UDNs will remain the same.
+    ]
 
     To create node [c ctext] (which we used in the example above), you just have to create a text file named [c ctext.pdml] in sub-directory [c config/nodes] of your working directory.
     PML will read this file and enable you to use node [c ctext] in your PML document.
@@ -7,7 +14,7 @@
 
     [insert_code file=[!get UDN_examples_dir]/config/nodes/ctext.pdml]
 
-    Note the mandatory file extension used in the above example: [c pdml]. This means that the file contains a [i PDML document]. PDML stands for [i Practical Data and Markup Language]. You can easily see that PDML code looks like PML code. This is no surprise, because the PDML syntax is actually used in PML. So you don't need to learn a new syntax. Another advantage is that all PDML features (such as comments or [c !ins-file] nodes to insert shared code) can be used to define UDNs. For more information about PDML please visit its [link url=https://pdml-lang.github.io/ text=website] or read [link url=https://pdml-lang.github.io/docs/introduction/index.html text="Introduction to PDML"].
+    Note the mandatory file extension used in the above example: [c pdml]. This means that the file contains a [i PDML document]. PDML stands for [i Practical Data and Markup Language]. You can easily see that PDML code looks like PML code. This is no surprise, because the PDML syntax is actually used in PML. So you don't need to learn a new syntax. Another advantage is that all PDML features (such as comments or [c u:ins_file] nodes to insert shared code) can be used to define UDNs. For more information about PDML please visit its [link url=https://pdml-lang.github.io/ text=website] or read [link url=https://pdml-lang.github.io/docs/introduction/index.html text="Introduction to PDML"].
 
     As can be seen in the above code:
 

@@ -102,7 +102,7 @@ To create node [c ctext], you just have to put a text file named [c ctext.pdml] 
 	]
 code]
 
-Note the mandatory file extension used in the above example: [c pdml]. This means that the file contains a [PDML document]. PDML stands for [i Practical Data and Markup Language]. You can easily see that PDML code looks like PML code. This is no surprise, because the PDML syntax is actually used in PML. So you don't need to learn a new syntax. Another advantage is that all PDML features (such as [c !ins-file] to insert shared code) can be used to define UDNs. For more information about PDML please visit its [link url=... text=website] or read [link url=... text="Introduction to PDML"].
+Note the mandatory file extension used in the above example: [c pdml]. This means that the file contains a [PDML document]. PDML stands for [i Practical Data and Markup Language]. You can easily see that PDML code looks like PML code. This is no surprise, because the PDML syntax is actually used in PML. So you don't need to learn a new syntax. Another advantage is that all PDML features (such as [c u:ins_file] to insert shared code) can be used to define UDNs. For more information about PDML please visit its [link url=... text=website] or read [link url=... text="Introduction to PDML"].
 
 As can be seen:
 
