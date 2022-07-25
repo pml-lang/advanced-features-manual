@@ -1,7 +1,7 @@
 [doc [title Advanced PML Features]
 
     [table
-        [tr [tc [b PML Version]][tc 2.3.0 2022-02-11]]
+        [tr [tc [b PML Version]][tc 3.0.0 2022-08-07]]
         [tr [tc [b First Published]][tc 2021-12-14]]
         [tr [tc [b License]][tc [link url=https://creativecommons.org/licenses/by-nd/4.0// text="CC BY-ND 4.0"]]]
         [tr [tc [b Author and Copyright]][tc Christian Neumanns]]
