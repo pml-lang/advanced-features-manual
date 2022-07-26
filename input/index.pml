@@ -9,8 +9,10 @@
         [tr [tc [b PML Markup Code]][tc [link url=https://github.com/pml-lang/advanced-features-manual text=Github]]]
     ]
 
-    [!set examples_dir=input/examples]
+[-
+    [!set examples_dir=examples]
     [!set UDN_examples_dir=[!get examples_dir]/UDNs]
+-]
     [!set pdml_extensions_online_docs=https://pdml-lang.github.io/docs/extensions/]
 [-
     [!set images_dir=images]
